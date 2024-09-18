@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="description" content="Astro description"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v4.15.6"><title>Login</title><style>:root{--accent: 255, 100, 0;--accent-light: 255, 155, 0;--accent-dark: 100, 50, 1;--accent-gradient: linear-gradient( 45deg, rgb(var(--accent)), rgb(var(--accent-light)) 30%, white 60% )}html{font-family:system-ui,sans-serif;background:#000}code{font-family:Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace}
+body{margin:0;padding:0;background-size:cover;font-family:sans-serif}.box[data-astro-cid-sgpqyurt]{position:absolute;background-color:#fff;top:50%;left:50%;transform:translate(-50%,-50%);width:25rem;padding:2.5rem;box-sizing:border-box;border:1px solid #dadce0;-webkit-border-radius:8px;border-radius:8px}.box[data-astro-cid-sgpqyurt] h2[data-astro-cid-sgpqyurt]{margin:0px 0 -.125rem;padding:0;text-align:center;color:#202124;font-family:Google Sans,Noto Sans Myanmar UI,arial,sans-serif;font-size:24px;font-weight:400}.box[data-astro-cid-sgpqyurt] p[data-astro-cid-sgpqyurt]{font-size:16px;font-weight:400;letter-spacing:.1px;line-height:1.5;margin-bottom:25px;text-align:center}.box[data-astro-cid-sgpqyurt] .inputBox[data-astro-cid-sgpqyurt]{position:relative}.box[data-astro-cid-sgpqyurt] .inputBox[data-astro-cid-sgpqyurt] input[data-astro-cid-sgpqyurt]{width:93%;padding:.625rem 10px;font-size:1rem;letter-spacing:.062rem;margin-bottom:1.875rem;border:1px solid #ccc;background:transparent;border-radius:4px}.box[data-astro-cid-sgpqyurt] .inputBox[data-astro-cid-sgpqyurt] label[data-astro-cid-sgpqyurt]{position:absolute;top:0;left:10px;padding:.625rem 0;font-size:1rem;color:gray;pointer-events:none;transition:.5s}.box[data-astro-cid-sgpqyurt] .inputBox[data-astro-cid-sgpqyurt] input[data-astro-cid-sgpqyurt]:focus~label[data-astro-cid-sgpqyurt],.box[data-astro-cid-sgpqyurt] .inputBox[data-astro-cid-sgpqyurt] input[data-astro-cid-sgpqyurt]:valid~label[data-astro-cid-sgpqyurt],.box[data-astro-cid-sgpqyurt] .inputBox[data-astro-cid-sgpqyurt] input[data-astro-cid-sgpqyurt]:not([value=""])~label[data-astro-cid-sgpqyurt]{top:-1.125rem;left:10px;color:#1a73e8;font-size:.75rem;background-color:#fff;height:10px;padding-left:5px;padding-right:5px}.box[data-astro-cid-sgpqyurt] .inputBox[data-astro-cid-sgpqyurt] input[data-astro-cid-sgpqyurt]:focus{outline:none;border:2px solid #1a73e8}.box[data-astro-cid-sgpqyurt] input[data-astro-cid-sgpqyurt][type=button]{border:none;outline:none;color:#fff;background-color:#1a73e8;padding:.625rem 1.25rem;cursor:pointer;border-radius:.312rem;font-size:1rem;float:right}.box[data-astro-cid-sgpqyurt] input[data-astro-cid-sgpqyurt][type=button]:hover{background-color:#287ae6;box-shadow:0 1px 1px #4285f473,0 1px 3px 1px #4285f44d}
+</style></head> <body>  <main data-astro-cid-sgpqyurt> <div class="box" data-astro-cid-sgpqyurt> <h2 data-astro-cid-sgpqyurt>Sign in</h2> <p data-astro-cid-sgpqyurt>Use your RoboSMP Account</p> <form data-astro-cid-sgpqyurt> <div class="inputBox" data-astro-cid-sgpqyurt> <input required id="user" type="text" name="user" required onkeyup="this.setAttribute('value', this.value);" value="" data-astro-cid-sgpqyurt> <label data-astro-cid-sgpqyurt>Minecraft Username</label> </div> <div class="inputBox" data-astro-cid-sgpqyurt> <input required id="pass" type="password" name="pass" required onkeyup="this.setAttribute('value', this.value);" value="" data-astro-cid-sgpqyurt> <label data-astro-cid-sgpqyurt>Password</label> </div> <div data-astro-cid-sgpqyurt> <input id="submit" type="button" name="sumbit" value="Submit" data-astro-cid-sgpqyurt> </div> </form> <span data-astro-cid-sgpqyurt>Don't have an account.</span><br data-astro-cid-sgpqyurt><a href="/register" data-astro-cid-sgpqyurt>Register Now.</a> </div> <script type="text/javascript">
+            function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp;
+}
+function httpPatch(theUrl,x)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "PATCH", theUrl, false ); // false for synchronous request
+    xmlHttp.send(x);
+    return xmlHttp;
+}
+            function send(){
+                var user=document.getElementById('user').value
+                var pass=document.getElementById('pass').value
+                var x = httpGet('https://robosmp-bb014-default-rtdb.asia-southeast1.firebasedatabase.app/Users/'+user+'.json')
+                var y = JSON.parse(x.responseText)
+                if(x.responseText == null || x.responseText == 'null'){
+                    alert('User not found.')
+                }
+                else if(pass == y.pass){
+                    localStorage.setItem('user',user)
+                    localStorage.setItem('pass',pass)
+                    window.location.href="/"
+                }
+                else{
+                    alert("Wrong Password")
+                }
+                
+            }
+            document.addEventListener('DOMContentLoaded',() => {
+                if(localStorage.getItem('user') == null || localStorage.getItem('user') == 'null'){
+                    
+                }
+                else{
+                    window.location.href="/"
+                }
+            document.getElementById('submit')?.addEventListener('click',send)
+            })
+        </script> </main>  </body></html> 
